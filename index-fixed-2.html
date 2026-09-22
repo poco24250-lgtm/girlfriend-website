@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY Darling ❤️</title>
+
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#070205;color:#fff}
+body{
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,20,90,.12),transparent 30%),
+    radial-gradient(circle at 80% 80%,rgba(255,50,120,.10),transparent 30%),
+    #070205;
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.wrap{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:30px 16px}
+.card{
+  width:min(900px,100%);
+  background:rgba(25,5,12,.78);
+  border:1px solid rgba(255,40,90,.28);
+  border-radius:28px;
+  padding:30px;
+  box-shadow:0 20px 70px rgba(0,0,0,.45),0 0 45px rgba(255,20,90,.08);
+}
+.hidden{display:none!important}
+.tag{
+  display:inline-block;padding:8px 13px;border-radius:20px;
+  background:rgba(255,20,90,.13);color:#ff9fba;font-size:13px
+}
+h1{font-size:clamp(34px,7vw,64px);margin:22px 0 10px}
+h2{font-size:clamp(28px,5vw,48px);margin:20px 0 8px}
+p.sub{color:#bcaeb3;margin:0 0 24px}
+.btn{
+  border:0;border-radius:30px;padding:14px 22px;
+  background:linear-gradient(90deg,#ff1454,#d60045);
+  color:#fff;font-weight:700;
+  box-shadow:0 8px 25px rgba(255,0,80,.22)
+}
+.btn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.btn.secondary{
+  background:transparent;border:1px solid rgba(255,255,255,.15);
+  box-shadow:none
+}
+.actions{display:flex;justify-content:flex-end;gap:12px;margin-top:22px;flex-wrap:wrap}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+input,textarea{
+  width:100%;border:1px solid rgba(255,255,255,.13);
+  background:rgba(0,0,0,.18);color:#fff;border-radius:15px;
+  padding:15px;outline:none
+}
+input:focus,textarea:focus{border-color:#ff2b63}
+textarea{min-height:150px;resize:vertical}
+
+.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.choice{
+  padding:16px;border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.025);color:#fff;border-radius:15px;
+  text-align:left
+}
+.choice.selected{border-color:#ff245d;background:rgba(255,20,80,.13)}
+.note{
+  margin-top:14px;padding:12px 14px;border-radius:14px;
+  color:#ffb2c5;background:rgba(255,20,80,.08);
+  border:1px solid rgba(255,20,80,.2)
+}
+
+.calendar{
+  display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:18px
+}
+.day{
+  min-height:48px;border-radius:12px;border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.025);color:#fff
+}
+.day.muted{opacity:.2;pointer-events:none}
+.day.past{opacity:.25;cursor:not-allowed}
+.day.selected{background:#ff1454;border-color:#ff1454}
+
+.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.time{
+  padding:17px;border-radius:15px;border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.025);color:#fff
+}
+.time.selected{background:rgba(255,20,80,.14);border-color:#ff245d}
+
+.song-list{display:grid;gap:12px}
+.song{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:15px;border-radius:16px;
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.025)
+}
+.song.active{border-color:#ff245d;background:rgba(255,20,80,.12)}
+.song-name{font-weight:600}
+.audio{
+  width:100%;margin-top:14px
+}
+
+.photos{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px
+}
+.photo-box{
+  border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.1);
+  background:#10070b
+}
+.photo-box img{
+  display:block;width:100%;aspect-ratio:1/1;object-fit:cover
+}
+.photo-btn{
+  width:100%;padding:12px;border:0;border-top:1px solid rgba(255,255,255,.08);
+  background:rgba(0,0,0,.25);color:#fff
+}
+.photo-input{display:none}
+
+.summary{
+  margin-top:22px;display:grid;gap:10px
+}
+.summary-row{
+  display:flex;justify-content:space-between;gap:20px;
+  padding:13px 15px;border-radius:13px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.07)
+}
+.summary-row span:first-child{color:#ff9fb7}
+.summary-row span:last-child{text-align:right;word-break:break-word}
+
+.heart{
+  font-size:65px;text-align:center;
+  animation:pulse 1.4s infinite
+}
+.center{text-align:center}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+
+@media(max-width:650px){
+  .card{padding:22px;border-radius:22px}
+  .choice-grid,.time-grid,.photos{grid-template-columns:1fr}
+  .summary-row{flex-direction:column;gap:5px}
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+<div class="card">
+
+<!-- 0 OPENING -->
+<section id="page0">
+  <div class="center">
+    <div class="tag">A LITTLE SURPRISE</div>
+    <h1>Hey, Cute 🥰</h1>
+    <p class="sub">I have a tiny plan for us...</p>
+    <button class="btn" onclick="go(1)">Open the surprise ✨</button>
+  </div>
+</section>
+
+<!-- 1 DATE -->
+<section id="page1" class="hidden">
+  <div class="top">
+    <span class="tag">01 · Date</span>
+    <button class="btn secondary" onclick="go(0)">Back</button>
+  </div>
+  <h2>Pick a date 📅</h2>
+  <p class="sub">Past dates are locked.</p>
+  <div id="calendar" class="calendar"></div>
+  <div class="actions">
+    <button id="dateNext" class="btn" disabled onclick="go(2)">Continue ➡️</button>
+  </div>
+</section>
+
+<!-- 2 TIME -->
+<section id="page2" class="hidden">
+  <div class="top">
+    <span class="tag">02 · Time</span>
+    <button class="btn secondary" onclick="go(1)">Back</button>
+  </div>
+  <h2>What time? ⏰</h2>
+  <p class="sub">Choose one.</p>
+  <div id="times" class="time-grid"></div>
+  <div class="actions">
+    <button id="timeNext" class="btn" disabled onclick="go(3)">Continue ➡️</button>
+  </div>
+</section>
+
+<!-- 3 LOCATION -->
+<section id="page3" class="hidden">
+  <div class="top">
+    <span class="tag">03 · Location</span>
+    <button class="btn secondary" onclick="go(2)">Back</button>
+  </div>
+  <h2>Where should we go? 📍</h2>
+  <p class="sub">You can change this to any place you want.</p>
+  <input id="locationInput" value="Boons, Basti"
+         oninput="updateEditable()">
+  <div class="actions">
+    <button id="locationNext" class="btn" onclick="go(4)">Continue ➡️</button>
+  </div>
+</section>
+
+<!-- 4 FOOD -->
+<section id="page4" class="hidden">
+  <div class="top">
+    <span class="tag">04 · Food</span>
+    <button class="btn secondary" onclick="go(3)">Back</button>
+  </div>
+  <h2>What should we eat? 🍜</h2>
+  <p class="sub">Choose one.</p>
+  <div id="foods" class="choice-grid"></div>
+  <div class="actions">
+    <button id="foodNext" class="btn" disabled onclick="go(5)">Continue ➡️</button>
+  </div>
+</section>
+
+<!-- 5 MOVIE -->
+<section id="page5" class="hidden">
+  <div class="top">
+    <span class="tag">05 · Movie</span>
+    <button class="btn secondary" onclick="go(4)">Back</button>
+  </div>
+  <h2>Which movie? 🎬</h2>
+  <p class="sub">This movie choice is editable.</p>
+  <input id="movieInput" value="Off Campus"
+         oninput="updateEditable()">
+  <div class="actions">
+    <button id="movieNext" class="btn" onclick="go(6)">Continue ➡️</button>
+  </div>
+</section>
+
+<!-- 6 PLAN -->
+<section id="page6" class="hidden">
+  <div class="top">
+    <span class="tag">06 · Plan</span>
+    <button class="btn secondary" onclick="go(5)">Back</button>
+  </div>
+  <h2>Would you like to go watch a movie with me? 🎬❤️</h2>
+  <input id="planInput"
+         value="Would you like to go watch a movie with me?"
+         oninput="updateEditable()">
+
+  <div class="choice-grid" style="margin-top:14px">
+    <button id="planYes" class="choice" onclick="choosePlan('Yes')">
+      Yes 😊❤️
+    </button>
+    <button id="planNo" class="choice" onclick="choosePlan('No')">
+      No 😢😥
+    </button>
+  </div>
+
+  <div class="actions">
+    <button id="planNext" class="btn" disabled onclick="go(7)">Continue ➡️</button>
+  </div>
+</section>
+
+<!-- 7 MESSAGE -->
+<section id="page7" class="hidden">
+  <div class="top">
+    <span class="tag">07 · Message</span>
+    <button class="btn secondary" onclick="go(6)">Back</button>
+  </div>
+  <h2>A little message for you 💌</h2>
+  <p class="sub">Edit the message if you want.</p>
+
+  <textarea id="messageInput" oninput="updateEditable()">I love you my kitty</textarea>
+
+  <div class="choice-grid" style="margin-top:10px">
+    <button id="loveYes" class="choice" onclick="chooseLove('Yes')">
+      Yes, You're My Love 😘💋❤️
+    </button>
+
+    <button id="loveNo" class="choice" onclick="chooseLove('No')">
+      No, Just Friends 🙂🤝
+    </button>
+  </div>
+
+  <div id="loveNote" class="note hidden">
+    Please choose the Yes option to continue ❤️
+  </div>
+
+  <div class="actions">
+    <button id="messageNext" class="btn" disabled onclick="go(8)">
+      Choose a song 🎵
+    </button>
+  </div>
+</section>
+
+<!-- 8 SONG -->
+<section id="page8" class="hidden">
+  <div class="top">
+    <span class="tag">08 · Song</span>
+    <button class="btn secondary" onclick="go(7)">Back</button>
+  </div>
+
+  <h2>Choose our song 🎵</h2>
+  <p class="sub">Select a song. The selected song will play from your local songs folder.</p>
+
+  <div id="songs" class="song-list"></div>
+
+  <div id="songStatus" class="note hidden"></div>
+
+  <audio id="audio" class="audio" controls preload="auto"></audio>
+
+  <div class="actions">
+    <button id="songNext" class="btn" disabled onclick="go(9)">
+      See the surprise ✨
+    </button>
+  </div>
+</section>
+
+<!-- 9 PHOTOS -->
+<section id="page9" class="hidden">
+  <div class="top">
+    <span class="tag">09 · Photos</span>
+    <button class="btn secondary" onclick="go(8)">Back</button>
+  </div>
+
+  <h2>Our little memories 📸❤️</h2>
+  <p class="sub">
+    The original photos stay here. You can choose a new photo for any slot.
+  </p>
+
+  <div id="photos" class="photos"></div>
+
+  <div class="actions">
+    <button class="btn" onclick="prepareFinal();go(10)">
+      Continue ❤️
+    </button>
+  </div>
+</section>
+
+<!-- 10 FINAL -->
+<section id="page10" class="hidden">
+  <div class="heart">❤️</div>
+  <div class="center">
+    <div class="tag">OUR LITTLE PLAN</div>
+    <h2>MY Baby❤️</h2>
+    <p id="finalMessage" class="sub"></p>
+  </div>
+
+  <div id="finalPhotos" class="photos"></div>
+  <div id="summary" class="summary"></div>
+
+  <div class="actions">
+    <button class="btn" onclick="celebrate()">
+      Make it official ✨
+    </button>
+  </div>
+</section>
+
+<!-- 11 OFFICIAL -->
+<section id="page11" class="hidden">
+  <div class="center">
+    <div class="heart">💖</div>
+    <div class="tag">IT'S OFFICIAL</div>
+    <h1>My Love ❤️</h1>
+    <p class="sub">
+      Our little plan is ready. ✨
+    </p>
+  </div>
+</section>
+
+</div>
+</div>
+
+<iframe id="photoUploadFrame" name="photoUploadFrame" style="display:none"></iframe>
+
+<script>
+/* =========================
+   BACKEND
+========================= */
+
+const BACKEND_URL =
+"https://script.google.com/macros/s/AKfycbyfRAdMtCDZScoYPaPFkLpfiJeabNK5O3wiZIHAbLZzFHLz4LQ9TSNli9T6NS0bYSHJ/exec";
+
+/* =========================
+   WEBSITE DATA
+========================= */
+
+const data = {
+  times:[
+    "10:00 AM",
+    "12:00 PM",
+    "4:00 PM",
+    "6:00 PM",
+    "7:30 PM",
+    "9:00 PM"
+  ],
+
+  foods:[
+    "Pizza 🍕",
+    "Tea 🍵",
+    "Burgers 🍔",
+    "Pasta 🍝",
+    "Coffee ☕",
+    "Noodles 🍜"
+  ],
+
+  songs:[
+    {name:"Kabhi Jo Badal Barse",file:"songs/song1.mp3"},
+    {name:"Aaj Phir",file:"songs/song2.mp3"},
+    {name:"Agar Tum Saath Ho",file:"songs/song3.mp3"},
+    {name:"Chaleya",file:"songs/song4.mp3"},
+    {name:"Humnava Mere",file:"songs/song5.mp3"},
+    {name:"Jeene Laga Hoon",file:"songs/song6.mp3"}
+  ]
+};
+
+const state={
+  date:null,
+  time:null,
+  location:"Boons, Basti",
+  food:null,
+  movie:"Off Campus",
+  plan:"Would you like to go watch a movie with me? 📽️🎬🎥🎦🍿",
+  planAnswer:null,
+  message:"Will you make me your boyfriend? 💋🤗🤭",
+  loveAnswer:null,
+  song:null,
+  photos:[
+    "photo1.jpg",
+    "photo2.jpg",
+    "photo3.jpg",
+    "photo4.jpg"
+  ]
+};
+
+let currentPage=0;
+
+/* =========================
+   PAGE CONTROL
+========================= */
+
+function go(n){
+
+  if(n<8) stopSong();
+
+  document.querySelectorAll("section").forEach(s=>{
+    s.classList.add("hidden");
+  });
+
+  document.getElementById("page"+n).classList.remove("hidden");
+  currentPage=n;
+
+  if(n===1) renderCalendar();
+  if(n===2) renderTimes();
+  if(n===4) renderFoods();
+  if(n===8) renderSongs();
+  if(n===9) renderPhotos();
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* =========================
+   BACKEND LOG
+========================= */
+
+function sendLog(field,oldValue,newValue){
+  if(oldValue===newValue)return;
+
+  const payload={
+    action:"logChange",
+    field:field,
+    oldValue:String(oldValue ?? ""),
+    newValue:String(newValue ?? ""),
+    timestamp:new Date().toISOString()
+  };
+
+  fetch(BACKEND_URL,{
+    method:"POST",
+    mode:"no-cors",
+    headers:{
+      "Content-Type":"text/plain;charset=utf-8"
+    },
+    body:JSON.stringify(payload)
+  }).catch(()=>{});
+}
+
+/* =========================
+   DATE
+========================= */
+
+function dateKey(d){
+ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+
+function renderCalendar(){
+  const box=document.getElementById("calendar");
+  box.innerHTML="";
+
+  const now=new Date();
+  now.setHours(0,0,0,0);
+
+  const year=now.getFullYear();
+  const month=now.getMonth();
+
+  const first=new Date(year,month,1);
+  const days=new Date(year,month+1,0).getDate();
+  const start=first.getDay();
+
+  for(let i=0;i<start;i++){
+    const empty=document.createElement("div");
+    box.appendChild(empty);
+  }
+
+  for(let day=1;day<=days;day++){
+    const d=new Date(year,month,day);
+    const b=document.createElement("button");
+    b.className="day";
+    b.textContent=day;
+
+    if(d<now){
+      b.classList.add("past");
+      b.disabled=true;
+    }else{
+      b.onclick=()=>{
+        const old=state.date;
+        state.date=dateKey(d);
+        sendLog("Date",old,state.date);
+
+        document.querySelectorAll(".day").forEach(x=>{
+          x.classList.remove("selected");
+        });
+
+        b.classList.add("selected");
+        document.getElementById("dateNext").disabled=false;
+      };
+    }
+
+    if(state.date===dateKey(d)){
+      b.classList.add("selected");
+    }
+
+    box.appendChild(b);
+  }
+
+  document.getElementById("dateNext").disabled=!state.date;
+}
+
+/* =========================
+   TIME
+========================= */
+
+function renderTimes(){
+  const box=document.getElementById("times");
+  box.innerHTML="";
+
+  data.times.forEach(t=>{
+    const b=document.createElement("button");
+    b.className="time";
+    b.textContent=t;
+
+    if(state.time===t)b.classList.add("selected");
+
+    b.onclick=()=>{
+      const old=state.time;
+      state.time=t;
+      sendLog("Time",old,t);
+
+      document.querySelectorAll(".time").forEach(x=>{
+        x.classList.remove("selected");
+      });
+
+      b.classList.add("selected");
+      document.getElementById("timeNext").disabled=false;
+    };
+
+    box.appendChild(b);
+  });
+
+  document.getElementById("timeNext").disabled=!state.time;
+}
+
+/* =========================
+   FOOD
+========================= */
+
+function renderFoods(){
+  const box=document.getElementById("foods");
+  box.innerHTML="";
+
+  data.foods.forEach(food=>{
+    const b=document.createElement("button");
+    b.className="choice";
+    b.textContent=food;
+
+    if(state.food===food)b.classList.add("selected");
+
+    b.onclick=()=>{
+      const old=state.food;
+      state.food=food;
+      sendLog("Food",old,food);
+
+      document.querySelectorAll("#foods .choice").forEach(x=>{
+        x.classList.remove("selected");
+      });
+
+      b.classList.add("selected");
+      document.getElementById("foodNext").disabled=false;
+    };
+
+    box.appendChild(b);
+  });
+
+  document.getElementById("foodNext").disabled=!state.food;
+}
+
+/* =========================
+   EDITABLE FIELDS
+========================= */
+
+function updateEditable(){
+  const location=document.getElementById("locationInput").value.trim();
+  const movie=document.getElementById("movieInput").value.trim();
+  const plan=document.getElementById("planInput").value.trim();
+  const message=document.getElementById("messageInput").value.trim();
+
+  if(location!==state.location){
+    sendLog("Location",state.location,location);
+    state.location=location;
+  }
+
+  if(movie!==state.movie){
+    sendLog("Movie",state.movie,movie);
+    state.movie=movie;
+  }
+
+  if(plan!==state.plan){
+    sendLog("Plan",state.plan,plan);
+    state.plan=plan;
+  }
+
+  if(message!==state.message){
+    sendLog("Message",state.message,message);
+    state.message=message;
+  }
+
+  document.getElementById("locationNext").disabled=!location;
+  document.getElementById("movieNext").disabled=!movie;
+  document.getElementById("planNext").disabled=
+    !plan || !state.planAnswer;
+}
+
+/* =========================
+   PLAN
+========================= */
+
+function choosePlan(answer){
+  const old=state.planAnswer;
+  state.planAnswer=answer;
+
+  sendLog("Plan Answer",old,answer);
+
+  document.getElementById("planYes").classList.toggle(
+    "selected",answer==="Yes"
+  );
+
+  document.getElementById("planNo").classList.toggle(
+    "selected",answer==="No"
+  );
+
+  updateEditable();
+}
+
+/* =========================
+   LOVE
+========================= */
+
+function chooseLove(answer){
+  const old=state.loveAnswer;
+  state.loveAnswer=answer;
+
+  sendLog("Love Answer",old,answer);
+
+  document.getElementById("loveYes").classList.toggle(
+    "selected",answer==="Yes"
+  );
+
+  document.getElementById("loveNo").classList.toggle(
+    "selected",answer==="No"
+  );
+
+  const next=document.getElementById("messageNext");
+  const note=document.getElementById("loveNote");
+
+  if(answer==="Yes"){
+    next.disabled=false;
+    note.classList.add("hidden");
+  }else{
+    next.disabled=true;
+    note.classList.remove("hidden");
+  }
+}
+
+/* =========================
+   SONGS
+========================= */
+
+const audio=document.getElementById("audio");
+
+function renderSongs(){
+  const box=document.getElementById("songs");
+  box.innerHTML="";
+
+  data.songs.forEach((song,index)=>{
+    const row=document.createElement("div");
+    row.className="song";
+
+    if(state.song===index)row.classList.add("active");
+
+    const name=document.createElement("div");
+    name.className="song-name";
+    name.textContent=song.name;
+
+    const button=document.createElement("button");
+    button.className="btn secondary";
+    button.textContent="Select & Play";
+
+    button.onclick=()=>selectSong(index);
+
+    row.appendChild(name);
+    row.appendChild(button);
+    box.appendChild(row);
+  });
+
+  document.getElementById("songNext").disabled=state.song===null;
+}
+
+function selectSong(index){
+  const old=state.song===null?"":data.songs[state.song].name;
+  state.song=index;
+
+  sendLog(
+    "Song",
+    old,
+    data.songs[index].name
+  );
+
+  const song=data.songs[index];
+  const status=document.getElementById("songStatus");
+audio.pause();
+audio.src = song.file;
+audio.currentTime = 0;
+audio.load();
+
+status.classList.remove("hidden");
+status.textContent = "Playing: " + song.name + " 🎵";
+
+audio.play().catch(() => {});
+  renderSongs();
+}
+
+function stopSong(){
+  if(!audio)return;
+  audio.pause();
+  audio.currentTime=0;
+}
+
+/* =========================
+   PHOTOS
+========================= */
+
+function renderPhotos(){
+  const box=document.getElementById("photos");
+  box.innerHTML="";
+
+  state.photos.forEach((src,index)=>{
+    const wrap=document.createElement("div");
+    wrap.className="photo-box";
+
+    const img=document.createElement("img");
+    img.id="photoImg"+index;
+    img.src=src;
+    img.onerror=()=>{
+      img.src="photo"+(index+1)+".jpg";
+    };
+
+    const label=document.createElement("label");
+    label.className="photo-btn";
+    label.textContent="Change Photo";
+
+    const input=document.createElement("input");
+    input.type="file";
+    input.accept="image/*";
+    input.className="photo-input";
+
+    input.onchange=e=>{
+      const file=e.target.files[0];
+      if(file)changePhoto(index,file);
+    };
+
+    label.appendChild(input);
+    wrap.appendChild(img);
+    wrap.appendChild(label);
+    box.appendChild(wrap);
+  });
+}
+
+function changePhoto(index,file){
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    const base64=reader.result.split(",")[1];
+
+    document.getElementById("photoImg"+index).src=reader.result;
+
+    const old=state.photos[index];
+
+    state.photos[index]=reader.result;
+
+    sendLog(
+      "Photo "+(index+1),
+      old,
+      file.name
+    );
+
+    uploadPhoto(
+      index+1,
+      base64,
+      file.type,
+      file.name
+    );
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function uploadPhoto(number,base64,mimeType,fileName){
+  const form=document.createElement("form");
+  form.method="POST";
+  form.action=BACKEND_URL;
+  form.target="photoUploadFrame";
+  form.style.display="none";
+
+  const fields={
+    photoName:"photo"+number,
+    base64:base64,
+    mimeType:mimeType
+  };
+
+  Object.keys(fields).forEach(key=>{
+    const input=document.createElement("input");
+    input.type="hidden";
+    input.name=key;
+    input.value=fields[key];
+    form.appendChild(input);
+  });
+
+  document.body.appendChild(form);
+
+  const frame=document.getElementById("photoUploadFrame");
+  frame.onload=()=>{
+    alert(
+      "Photo "+number+
+      " server par save ho gayi. ❤️"
+    );
+    form.remove();
+  };
+
+  form.submit();
+}
+
+/* =========================
+   FINAL
+========================= */
+
+function formatDate(value){
+  if(!value)return"";
+  const d=new Date(value+"T00:00:00");
+  return d.toLocaleDateString("en-IN",{
+    day:"numeric",
+    month:"long",
+    year:"numeric"
+  });
+}
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function prepareFinal(){
+  document.getElementById("finalMessage").textContent=state.message;
+
+  const fp=document.getElementById("finalPhotos");
+  fp.innerHTML="";
+
+  state.photos.forEach((src,index)=>{
+    const div=document.createElement("div");
+    div.className="photo-box";
+
+    const img=document.createElement("img");
+    img.src=src;
+
+    div.appendChild(img);
+    fp.appendChild(div);
+  });
+
+  const songName=
+    state.song===null
+    ?"Not selected"
+    :data.songs[state.song].name;
+
+  document.getElementById("summary").innerHTML=`
+    <div class="summary-row">
+      <span>Date</span>
+      <span>${escapeHtml(formatDate(state.date))}</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Time</span>
+      <span>${escapeHtml(state.time)}</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Location</span>
+      <span>${escapeHtml(state.location)}</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Food</span>
+      <span>${escapeHtml(state.food)}</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Movie</span>
+      <span>${escapeHtml(state.movie)}</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Plan</span>
+      <span>${escapeHtml(state.plan)} — ${escapeHtml(state.planAnswer)}</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Song</span>
+      <span>${escapeHtml(songName)}</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Message</span>
+      <span>${escapeHtml(state.message)}</span>
+    </div>
+
+    <div class="summary-row">
+      <span>Love Answer</span>
+      <span>${escapeHtml(state.loveAnswer)}</span>
+    </div>
+  `;
+}
+
+/* =========================
+   FINAL SUBMISSION
+========================= */
+
+function submitFinal(){
+  const songName=
+    state.song===null
+    ?""
+    :data.songs[state.song].name;
+
+  const payload={
+    action:"finalSubmit",
+    timestamp:new Date().toISOString(),
+    date:state.date,
+    time:state.time,
+    location:state.location,
+    food:state.food,
+    movie:state.movie,
+    plan:state.plan,
+    planAnswer:state.planAnswer,
+    message:state.message,
+    loveAnswer:state.loveAnswer,
+    song:songName
+  };
+
+  fetch(BACKEND_URL,{
+    method:"POST",
+    mode:"no-cors",
+    headers:{
+      "Content-Type":"text/plain;charset=utf-8"
+    },
+    body:JSON.stringify(payload)
+  }).catch(()=>{});
+}
+
+function celebrate(){
+  submitFinal();
+
+  const old=document.querySelector(".heart");
+  if(old){
+    old.textContent="💖";
+  }
+
+  setTimeout(()=>{
+    go(11);
+  },500);
+}
+
+/* =========================
+   LOAD SAVED PHOTOS
+========================= */
+
+function loadSavedPhotos(){
+  fetch(BACKEND_URL)
+    .then(response=>response.json())
+    .then(result=>{
+      if(!result.success || !result.photos)return;
+
+      Object.keys(result.photos).forEach(name=>{
+        const item=result.photos[name];
+        if(!item || !item.exists)return;
+
+        const number=Number(name.replace("photo",""))-1;
+        if(number<0 || number>3)return;
+
+        state.photos[number]="data:"+item.mimeType+";base64,"+item.data;
+      });
+    })
+    .catch(()=>{});
+}
+
+/* =========================
+   START
+========================= */
+
+document.getElementById("locationInput").value=state.location;
+document.getElementById("movieInput").value=state.movie;
+document.getElementById("planInput").value=state.plan;
+document.getElementById("messageInput").value=state.message;
+
+go(0);
+loadSavedPhotos();
+</script>
+
+</body>
+</html>
